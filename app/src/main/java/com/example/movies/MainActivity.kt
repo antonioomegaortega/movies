@@ -18,20 +18,12 @@ class MainActivity : AppCompatActivity() {
         val text_total = findViewById<TextView>(R.id.txt_total)
 
         GlobalScope.launch(Dispatchers.Main) {
-            val result = remoteApi.getMovies()
+            val result = remoteApi.getMoviesByPage(1)
             if (result is Success) {
-                text_pages.text = "Peliculas Disponibles: " + result.data.total_results.toString()
-                text_total.text = "Paginas: " + result.data.total_pages.toString()
-            }
-        }
-
-        GlobalScope.launch(Dispatchers.Main) {
-            val result = remoteApi.getMoviesByPage(2)
-            if (result is Success) {
+                text_pages.text = "Movies Available: " + result.data.total_results.toString()
+                text_total.text = "Pages: " + result.data.total_pages.toString()
 
             }
         }
-
-
     }
 }
