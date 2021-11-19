@@ -1,5 +1,6 @@
 package com.example.movies.models
 import kotlinx.serialization.Serializable
+
 @Serializable
 class MovieResponse(
         val page:Int,

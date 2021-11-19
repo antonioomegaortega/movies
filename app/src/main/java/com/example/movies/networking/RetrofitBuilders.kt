@@ -5,9 +5,7 @@ import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
-
 const val BASE_URL = "https://api.themoviedb.org/3/movie/"
-
 fun buildClient(): OkHttpClient = OkHttpClient.Builder()
         .addInterceptor(HttpLoggingInterceptor().apply {
           level = HttpLoggingInterceptor.Level.BODY
