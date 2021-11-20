@@ -14,12 +14,12 @@ import kotlinx.coroutines.launch
 
 class MainActivity : AppCompatActivity() {
     private val remoteApi = App.remoteApi
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val data = ArrayList<ItemsViewModel>()
         val adapter = CustomAdapter(data)
+
         val reclyclerView = findViewById<RecyclerView>(R.id.recyclerView)
         reclyclerView.layoutManager = LinearLayoutManager(this)
 
