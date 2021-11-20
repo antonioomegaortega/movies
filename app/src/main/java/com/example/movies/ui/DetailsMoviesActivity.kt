@@ -33,7 +33,6 @@ class DetailsMoviesActivity : AppCompatActivity() {
         var actionBar = supportActionBar
         actionBar?.setDisplayHomeAsUpEnabled(true)
     }
-
     override fun onSupportNavigateUp(): Boolean {
         onBackPressed()
         return true

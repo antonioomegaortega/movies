@@ -17,7 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-class MainActivity : AppCompatActivity(),MyCustomObjectListener {
+class MainActivity : AppCompatActivity(), MyCustomObjectListener {
     private val remoteApi = App.remoteApi
     var list = ArrayList<Movie>()
     var img_URL_Backdrop = "https://image.tmdb.org/t/p/w300"
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity(),MyCustomObjectListener {
         val adapter = CustomAdapter(data)
 
         adapter.setCallBackListener(object : MyCustomObjectListener {
-            override fun onClickMovie(id:Int) {
+            override fun onClickMovie(id: Int) {
                 var movieSelected = list.get(id)
                 val intent = Intent(applicationContext, DetailsMoviesActivity::class.java)
                 intent.putExtra("title", movieSelected.title)
@@ -56,31 +56,30 @@ class MainActivity : AppCompatActivity(),MyCustomObjectListener {
             if (result is Success) {
                 list = result.data.results as ArrayList<Movie>
                 for (item in list) {
-                    data.add(ItemsViewModel(item.backdrop_path, item.title, item.release_date, item.vote_average))
+                    data.add(
+                        ItemsViewModel(
+                            item.backdrop_path,
+                            item.title,
+                            item.release_date,
+                            item.vote_average
+                        )
+                    )
                 }
                 adapter.notifyDataSetChanged()
             }
 
             val resultPlayingNow = remoteApi.getMoviesPlayingNow()
 
-                     if (resultPlayingNow is Success) {
-                         var playingNowPictures = resultPlayingNow.data.results as ArrayList<Movie>
+            if (resultPlayingNow is Success) {
+                var playingNowPictures = resultPlayingNow.data.results as ArrayList<Movie>
 
-                       for (i in 1..5){
-                           val picasso = Picasso.get()
-                           picasso.load(img_URL_Backdrop + playingNowPictures[i].backdrop_path)
-                               .into(img1)
-                       }
-                     }
-
+                for (i in 1..5) {
+                    val picasso = Picasso.get()
+                    picasso.load(img_URL_Backdrop + playingNowPictures[i].backdrop_path)
+                        .into(img1)
+                }
+            }
         }
-
-
-
-
-
-
-
         reclyclerView.adapter = adapter
     }
 
