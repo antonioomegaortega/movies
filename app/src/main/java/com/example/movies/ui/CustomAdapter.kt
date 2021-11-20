@@ -35,13 +35,16 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val items = mList[position]
+
+        var progressValue = (items.rating * 10).toInt()
+
         holder.name.text = items.name
         holder.date.text = items.date
         val picasso = Picasso.get()
         picasso.load(img_URL_Backdrop + items.image)
             .into(holder.image)
-        holder.progressBar.progress = 40
-        holder.progressTextIndicator.text = "40%"
+        holder.progressBar.progress = progressValue
+        holder.progressTextIndicator.text = "$progressValue%"
     }
     override fun getItemCount(): Int {
         return mList.size

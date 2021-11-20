@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity(),MyCustomObjectListener {
             if (result is Success) {
                 list = result.data.results as ArrayList<Movie>
                 for (item in list) {
-                    data.add(ItemsViewModel(item.backdrop_path, item.title, item.release_date))
+                    data.add(ItemsViewModel(item.backdrop_path, item.title, item.release_date, item.vote_average))
                 }
                 adapter.notifyDataSetChanged()
             }
