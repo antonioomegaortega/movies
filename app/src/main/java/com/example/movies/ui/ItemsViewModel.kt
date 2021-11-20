@@ -1,3 +1,3 @@
 package com.example.movies.ui
 
-data class ItemsViewModel(val image: Int, val name: String,val date: String)
+data class ItemsViewModel(val image: String, val name: String,val date: String)
