@@ -17,4 +17,10 @@ class RemoteApi(private val apiService: RemoteApiService) {
     }catch (error: Throwable) {
         Failure(error)
     }
+    suspend fun getMoviesPlayingNow(): Result<MovieResponse> = try {
+        var data = apiService.getMoviesPlayingNow(key,language)
+        Success(data)
+    }catch (error: Throwable) {
+        Failure(error)
+    }
 }

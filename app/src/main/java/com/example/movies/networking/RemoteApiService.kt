@@ -13,5 +13,11 @@ interface RemoteApiService {
     suspend fun getMoviesByPage(@Query("page") page:Int,
                                 @Query("api_key") api_key:String,
                                 @Query("language") language:String):MovieResponse
+
+    @Throws(Exception::class)
+    @GET("now_playing")
+    suspend fun getMoviesPlayingNow(@Query("api_key") api_key:String,
+                                    @Query("language") language:String):MovieResponse
+
 }
 

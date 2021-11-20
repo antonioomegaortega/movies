@@ -28,5 +28,14 @@ class DetailsMoviesActivity : AppCompatActivity() {
         txt_name.text = name
         txt_date.text = date
         txt_overview.text = overview
+
+
+        var actionBar = supportActionBar
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressed()
+        return true
     }
 }
