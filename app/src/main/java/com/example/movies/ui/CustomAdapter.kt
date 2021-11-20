@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.R
@@ -39,6 +40,8 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
         val picasso = Picasso.get()
         picasso.load(img_URL_Backdrop + items.image)
             .into(holder.image)
+        holder.progressBar.progress = 40
+        holder.progressTextIndicator.text = "40%"
     }
     override fun getItemCount(): Int {
         return mList.size
@@ -48,6 +51,9 @@ class CustomAdapter(private val mList: List<ItemsViewModel>) : RecyclerView.Adap
         var image: ImageView = itemView.findViewById(R.id.img_movie)
         var name: TextView = itemView.findViewById(R.id.txt_movie_name)
         var date: TextView = itemView.findViewById(R.id.txt_movie_date)
+        var progressBar: ProgressBar = itemView.findViewById(R.id.circular_determinative_pb)
+        var progressTextIndicator: TextView = itemView.findViewById(R.id.progress_tv)
+
     }
 
 }
