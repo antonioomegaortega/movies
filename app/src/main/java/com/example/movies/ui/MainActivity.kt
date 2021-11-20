@@ -1,5 +1,6 @@
 package com.example.movies.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -7,14 +8,17 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.movies.App
 import com.example.movies.R
+import com.example.movies.models.Movie
 import com.example.movies.networking.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
-
 class MainActivity : AppCompatActivity(),MyCustomObjectListener {
     private val remoteApi = App.remoteApi
+    var list = ArrayList<Movie>()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -23,7 +27,13 @@ class MainActivity : AppCompatActivity(),MyCustomObjectListener {
 
         adapter.setCallBackListener(object : MyCustomObjectListener {
             override fun onClickMovie(id:Int) {
-                print(id)
+                var movieSelected = list.get(id)
+                val intent = Intent(applicationContext, DetailsMoviesActivity::class.java)
+                intent.putExtra("title", movieSelected.title)
+                intent.putExtra("date", movieSelected.release_date)
+                intent.putExtra("overview", movieSelected.overview)
+                intent.putExtra("img", movieSelected.backdrop_path)
+                startActivity(intent)
             }
         })
 
@@ -33,9 +43,8 @@ class MainActivity : AppCompatActivity(),MyCustomObjectListener {
         GlobalScope.launch(Dispatchers.Main) {
             val result = remoteApi.getMoviesByPage(1)
             if (result is Success) {
-                result.data.total_results.toString()
-                result.data.total_pages.toString()
-                for (item in result.data.results) {
+                list = result.data.results as ArrayList<Movie>
+                for (item in list) {
                     data.add(ItemsViewModel(item.backdrop_path, item.title, item.release_date))
                 }
                 adapter.notifyDataSetChanged()
