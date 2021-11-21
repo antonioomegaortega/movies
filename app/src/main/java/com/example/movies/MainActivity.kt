@@ -14,13 +14,12 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        var txt_movie_name = findViewById<TextView>(R.id.txt_movie_name)
 
 
         GlobalScope.launch(Dispatchers.Main) {
             val result = remoteApi.getMovies()
             if (result is Success) {
-                txt_movie_name.text = result.data.results.get(0).title
+                //txt_movie_name.text = result.data.results.get(0).title
             }
         }
     }

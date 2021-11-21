@@ -9,11 +9,11 @@
     android:padding="20dp"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/txt_movie_name"
+    <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:text="This is the End"
-        android:textColor="#020202" />
+        android:layout_height="match_parent"
+        android:background="@color/purple_700">
+
+    </androidx.recyclerview.widget.RecyclerView>
 
 </LinearLayout>
