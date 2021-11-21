@@ -2,6 +2,7 @@ package com.example.movies
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.TextView
 import com.example.movies.networking.Success
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -13,11 +14,13 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        var txt_movie_name = findViewById<TextView>(R.id.txt_movie_name)
+
 
         GlobalScope.launch(Dispatchers.Main) {
             val result = remoteApi.getMovies()
             if (result is Success) {
-                result.data.total_results
+                txt_movie_name.text = result.data.results.get(0).title
             }
         }
     }
